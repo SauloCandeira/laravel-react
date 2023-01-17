@@ -1,0 +1,19 @@
+table{
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+}
+
+td,th{
+    border-bottom:1px #dddddd solid;
+    text-align: left;
+    padding: 7px;
+}
+
+/* .striped:nth-child(even){
+    background-color: #dddddd;
+} */
+.hover:hover{
+    background-color: #ff9109;
+}
