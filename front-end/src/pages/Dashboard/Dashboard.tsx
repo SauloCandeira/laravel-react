@@ -1,11 +1,43 @@
 import { Button } from "../../components/Buttons/Button";
+import { Modal } from "../../components/Modal/Modal";
 import { Input } from "../../components/Input/Input";
 import { Text } from "../../components/Texts/Text";
 import { Table } from "../../components/Table/Table";
+import { TableX } from "../../components/TableX/TableX";
 import  Sidebar  from '../../components/Sidebar/sidebar'
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from 'axios';
 
 export function Dashboard() {
+
+  const [showModal, setShowModal] = useState(false)
+  const [os, setOs] = useState([]);
+
+  const openModal = () => {
+    setShowModal(prev=>!prev);
+  };
+
+  async function getOs()
+  {
+    try {
+      const response = await axios.get('http://127.0.0.1:8000/api/os')
+
+      const data = response.data;
+
+      console.log('Data dashboard', data);
+      setOs(data)
+    
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getOs();
+  }, []);
+
+
 
   const data = [
     {
@@ -67,22 +99,24 @@ export function Dashboard() {
         <div style={{padding: '20px', marginLeft: '19.0rem'}}>
 
 
-        <Link to={'NewOs'}> 
-          <Button
-            size="g"
-            variant="primary"
-          >
-            {' '} + Abrir nova{' '}
-          </Button>
-        </Link>
+          <Link to={'NewOs'}> 
+            <Button
+              size="g"
+              variant="primary"
+            >
+              {' '} + Abrir nova{' '}
+            </Button>
+          </Link>
 
           <Button
             size="g"
             variant="outline"
+            onClick={openModal}
           >
             {' '} Atualizar {' '}
           </Button>
 
+          <Modal showModal={showModal} setShowModal={setShowModal} />
 
         </div>
 
@@ -129,7 +163,7 @@ export function Dashboard() {
             Agendamento
           </Text>
 
-          <Table data={data} columns={columns} hover={true} striped={true} />
+          <TableX data={os} columns={null} hover={true} striped={true}/>
 
         </div>
 

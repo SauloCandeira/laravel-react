@@ -2,8 +2,17 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
+use Database\Seeders\OsFuncionarioSeeder;
+use Database\Seeders\EmpresaSeeder;
+use Database\Seeders\FuncionarioSeeder;
+use Database\Seeders\CondominioSeeder;
+use Database\Seeders\OsStatusSeeder;
+use Database\Seeders\OsTipoSeeder;
+use Database\Seeders\OsSeeder;
+
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +23,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([EmpresaSeeder::class]);
+        $this->call([FuncionarioSeeder::class]);
+        $this->call([CondominioSeeder::class]);
+        $this->call([OsStatusSeeder::class]);
+        $this->call([OsTipoSeeder::class]);
+        $this->call([OsSeeder::class]);
+        $this->call([OsSeeder::class]);
+        $this->call([OsFuncionarioSeeder::class]);
     }
 }

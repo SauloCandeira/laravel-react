@@ -1,7 +1,7 @@
 import './global.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Dashboard } from './pages/Dashboard/Dashboard';
-import { NewOs } from './pages/NewOs';
+import { NewOs } from './components/Form/NewOs';
 
 
 export function App() {

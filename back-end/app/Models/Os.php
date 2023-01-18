@@ -9,12 +9,11 @@ class Os extends Model
 {
     use HasFactory;
     protected $table = 'os';
-    protected $fillable = [
-        'cliente',
-        'tipo',
-        'data',
-        'prioridade',
-        'funcionarios',
-        'descricao',
-    ];
+    protected $primaryKey = 'id_os';
+
+    public function condominio()
+    {
+        return $this->belongsTo(Condominio::class, 'id_condominio');
+    }
+
 }

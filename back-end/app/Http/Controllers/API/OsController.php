@@ -8,6 +8,19 @@ use App\Models\Os;
 
 class OsController extends Controller
 {
+
+    public function search()
+    {
+        $os = Os::with('condominio')->get();
+
+        return $os;
+        // return response()->json([
+        //     'status' => 200,
+        //     'message' => 'Os returned Sucessfully'
+        // ]);
+    }
+
+
     public function store(Request $request)
     {
         $os = new Os;
