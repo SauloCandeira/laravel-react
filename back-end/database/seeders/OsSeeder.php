@@ -29,8 +29,6 @@ class OsSeeder extends Seeder
                 'id_empresa' =>  $faker->randomElement($ids),
                 'id_os_status' =>  $faker->randomElement($ids),
                 'id_funcionario' =>  $faker->randomElement($ids),
-
-
                 'ds_os' => $faker->realText($maxNbChars = 20, $indexSize = 2),
                 'ds_os_tecnico' => $faker->realText($maxNbChars = 20, $indexSize = 2),
                 'ds_os_solucao' => $faker->realText($maxNbChars = 20, $indexSize = 2),

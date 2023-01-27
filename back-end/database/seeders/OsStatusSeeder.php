@@ -17,9 +17,13 @@ class OsStatusSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        for($i = 1; $i<=4; $i++) {
+        $tipos = ['Fechada', 'Pendente', 'Agendamento', 'Em atendimento', 'A caminho', 'Aberta'];
+
+        for($i = 0; $i<=5; $i++) {
+
+
             DB::table('os_status')->insert([
-                'no_os_status' =>  $faker->randomElement(['Aberta', 'Pendente', 'Agendamento', 'A caminho', 'Fechada', 'Em atendimento']),
+                'no_os_status' => $tipos[$i],
                 'tp_status' => $faker->randomElement(['O', 'A']),
                 'nu_ordem' => $faker->numberBetween(0, 4),
             ]);

@@ -23,6 +23,7 @@ class OsFuncionarioSeeder extends Seeder
         for($i = 1; $i<=4; $i++) {
             DB::table('os_funcionario')->insert([
                 'id_os' => $faker->randomElement($ids),
+                'id_funcionario' => $faker->randomElement($ids),
             ]);
         }
     }

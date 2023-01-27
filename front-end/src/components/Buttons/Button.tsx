@@ -5,10 +5,10 @@ export type ButtonProps = {
     children: string;
     size: 'p' | 'm' | 'g';
     variant: 'primary' | 'secondary' | 'outline' | 'quaternary' | 'tertiary';
-
+    onClick: any,
 }
 
-export function Button({ size, children, variant, }: ButtonProps) {
+export function Button({ size, children, variant, onClick }: ButtonProps) {
 
         
     const {height, width} = variantToSize[size];
@@ -21,6 +21,7 @@ export function Button({ size, children, variant, }: ButtonProps) {
         // </button>
 
         <Container
+            onClick={onClick}
             bgColor={bgColor}
             color={color}
             borderColor={borderColor}

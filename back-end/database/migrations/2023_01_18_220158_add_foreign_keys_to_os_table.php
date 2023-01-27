@@ -25,7 +25,7 @@ return new class extends Migration
         Schema::table('os_funcionario', function(Blueprint $table)
 		{
             $table->foreign('id_os', 'fk_os__os_funcionario')->references('id_os')->on('os')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-
+            $table->foreign('id_funcionario', 'fk_funcionario__os_funcionario')->references('id_funcionario')->on('funcionario')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
     }
 

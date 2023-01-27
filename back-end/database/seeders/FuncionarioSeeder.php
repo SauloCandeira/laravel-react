@@ -19,7 +19,7 @@ class FuncionarioSeeder extends Seeder
 
         for($i = 1; $i<=4; $i++) {
             DB::table('funcionario')->insert([
-                'no_funcionario' =>  $faker->randomElement(['Roberto', 'Rodrigo', 'Vitor']),
+                'no_funcionario' =>  $faker->randomElement(['Roberto', 'Rodrigo', 'Vitor', 'Benjamin', 'Thiago', 'Diego']),
 
             ]);
         }

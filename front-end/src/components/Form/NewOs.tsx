@@ -27,7 +27,7 @@ export function NewOs()
     e.preventDefault();
 
     console.log(formData)
-    const res = await axios.post('http://127.0.0.1:8000/api/newOs', formData)
+    const res = await axios.post('http://127.0.0.1:8000/api/os', formData)
 
     if(res.data.status === 200)
     {

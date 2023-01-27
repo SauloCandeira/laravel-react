@@ -17,7 +17,7 @@ class OsTipoSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        for($i = 1; $i<=9; $i++) {
+        for($i = 1; $i<=4; $i++) {
             DB::table('os_tipo')->insert([
                 'no_os_tipo' => $faker->randomElement(['CANCELA TRAVADA', 'LEITOR FACIAL', 'LEITOR BIOMÉTRICO']),
                 // 'ref_os_tipo' => $faker->realText($maxNbChars = 20, $indexSize = 2),

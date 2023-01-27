@@ -18,9 +18,10 @@ return new class extends Migration
 			$table->integer('id_fornecedor')->nullable()->index('ix_fk_fornecedor__os_tipo');
 			$table->string('no_os_tipo', 100)->nullable();
 			$table->string('ref_os_tipo', 100)->nullable();
+            $table->boolean('is_envia_email')->default(true);
 			$table->dateTime('dt_inicio')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->dateTime('dt_fim')->nullable();
-            $table->boolean('is_envia_email')->default(true);
+
         });
     }
 

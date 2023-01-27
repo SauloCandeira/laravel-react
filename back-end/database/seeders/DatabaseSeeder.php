@@ -29,7 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call([OsStatusSeeder::class]);
         $this->call([OsTipoSeeder::class]);
         $this->call([OsSeeder::class]);
-        $this->call([OsSeeder::class]);
         $this->call([OsFuncionarioSeeder::class]);
     }
 }
