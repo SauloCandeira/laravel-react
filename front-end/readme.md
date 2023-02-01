@@ -14,7 +14,12 @@ Dependencias:
 4º - react-icons
 5º - chromatic
 6º - gh-pages
-
+7º - npm i classnames
 
 # CONFIGURAR GITHUB
 1º - Git init
+
+
+# FONTE:
+
+Dashboard: https://www.youtube.com/watch?v=yZBWJ0yQv8Y

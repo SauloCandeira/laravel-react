@@ -56,8 +56,8 @@ export default function ModalY({ visible, onClose }) {
 
       <div className="bg-white p-5 rounded w-auto h-4/5 ">
         
-        <h1 className="font-thin text-left text-lg text-gray-700 pb-14 ">
-         Ordem de Serviço
+        <h1 className="font-thin text-left text-lg text-gray-700 pb-6 ">
+         Ordem de Serviço (Modal Y)
         </h1>
 
         <form onSubmit={onSubmit}>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from "react-router-dom";
 import { Container, Content } from './styles'
 import { 
   FaTimes, 
@@ -26,11 +27,19 @@ const Sidebar = ({ active }) => {
     <Container sidebar={setSidebar}>
       {/* <FaTimes onClick={closeSidebar} />   */}
       <Content>
-        <SidebarItem Icon={FaHome} Text="Dashboard" />
-        <SidebarItem Icon={FaChartBar} Text="Equipe externa" />
-        <SidebarItem Icon={FaUserAlt} Text="Clientes" />
-        <SidebarItem Icon={FaEnvelope} Text="Relatório" />
-        <SidebarItem Icon={FaRegCalendarAlt} Text="Sair" />
+        <Link to={'/'}> 
+          <SidebarItem Icon={FaHome} Text="Dashboard" />
+        </Link>
+        <Link to={'/DashboardY'}> 
+          <SidebarItem Icon={FaChartBar} Text="Dashboard Y" />
+        </Link>
+        <Link to={'/DashboardX'}> 
+          <SidebarItem Icon={FaUserAlt} Text="Dashboard X" />
+        </Link>
+
+
+        {/* <SidebarItem Icon={FaEnvelope} Text="Relatório" />
+        <SidebarItem Icon={FaRegCalendarAlt} Text="Sair" /> */}
         {/* <SidebarItem Icon={FaIdCardAlt} Text="Employees" />
         <SidebarItem Icon={FaRegFileAlt} Text="Reports" />
         <SidebarItem Icon={FaRegSun} Text="Settings" /> */}

@@ -1,4 +1,4 @@
-import { FormEvent, useState }from 'react';
+import { FormEvent, useState, useEffect }from 'react';
 import axios from 'axios';
 
 const defaultFormData = {
@@ -10,9 +10,18 @@ const defaultFormData = {
   descricao: ""
 };
 
+export type ModalProps = {
+  request: Object
+  visible: Boolean
+  onClose: any
+}
 
-export default function ModalX({ visible, onClose }) {
 
+export default function ModalX({ request, visible, onClose } : ModalProps ) {
+
+
+  // console.log('data', request)
+  const [clientes, setClientes] = useState([]);
   const [formData, setFormData] = useState(defaultFormData);
   const { cliente, tipo, data, prioridade, funcionarios, descricao } = formData;
 
@@ -57,16 +66,16 @@ export default function ModalX({ visible, onClose }) {
       <div className="bg-white p-5 rounded w-auto h-4/5 ">
         
         <h1 className="font-thin text-left text-lg text-gray-700 pb-14 ">
-         Abrir Ordem de Serviço
+         Abrir Ordem de Serviço (ModalX)
         </h1>
 
         <form onSubmit={onSubmit}>
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 w-full mb-6 group">
-                <input type="text" id="cliente" onChange={onChange}  value={cliente} className="block py-2.5 px-0 w-full text-sm text-gray-400  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                {/* <input type="text" name="floating_cliente" id="floating_cliente"  */}
-                <label htmlFor="floating_cliente" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> Escolha o cliente </label>
-                
+
+              <input type="select" id="cliente" onChange={onChange}  value={cliente} className="block py-2.5 px-0 w-full text-sm text-gray-400  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+              <label htmlFor="floating_cliente" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> Escolha o cliente </label>
+                 
             </div>
             <div className="relative z-0 w-full mb-6 group">
                 {/* <input type="text" name="floating_company" id="floating_company"  */}

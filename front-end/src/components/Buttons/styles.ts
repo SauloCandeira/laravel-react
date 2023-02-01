@@ -88,9 +88,9 @@ export const Container = styled.button<ContainerProps>`
     border: 1px solid ${props => props.borderColor};
     color: ${props => props.color};
     font-size: 16px;
-    cursos: pointer;
+    cursor: pointer;
     border-radius: 6px;
-    margin: 0 5px;
+    margin: 0 3px;
 
     &:hover {
         background-color: ${props => props.hoverBgColor};

@@ -18,7 +18,8 @@ module.exports = {
       transparent: 'transparent',
       black: '#000',
       white: '#FFF',
-
+      blue: '#2563EB',
+      back: '#f1f1ef',
       gray: {
         900: '#121214',
         800: '#202024',
@@ -38,6 +39,7 @@ module.exports = {
         50: '#ff9109'
       }
 
+      
 
 
     },

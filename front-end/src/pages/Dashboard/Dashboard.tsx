@@ -1,19 +1,18 @@
+import { Outlet } from "react-router-dom";
+import SidebarX from "../../components/SidebarX/SidebarX";
 import { Button } from "../../components/Buttons/Button";
-import { Modal } from "../../components/Modal/Modal";
-import  ModalX  from "../../components/ModalX/ModalX";
-import { Input } from "../../components/Input/Input";
-import { Text } from "../../components/Texts/Text";
-import { Table } from "../../components/Table/Table";
-import { TableX } from "../../components/TableX/TableX";
-import  Sidebar  from '../../components/Sidebar/sidebar'
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import axios from 'axios';
+import { useEffect, useState } from "react";
+import  ModalX  from "../../components/ModalX/ModalX";
+import { TableX } from "../../components/TableX/TableX";
+import Table4  from "../../components/Table4/Table4";
+import { Text } from "../../components/Texts/Text";
 
-export function Dashboard() {
+export default function Dashboard() {
 
   const [showModal, setShowModal] = useState(false)
   const [os, setOs] = useState([]);
+  const [clientes, setClientes] = useState([]);
   const [osStatus, setOsStatus] = useState([]);
 
   const handleOnClose = () => setShowModal(false)
@@ -22,19 +21,19 @@ export function Dashboard() {
     setShowModal(prev=>!prev);
   };
 
-  async function getOs()
-  {
-    try {
-      const response = await axios.get('http://127.0.0.1:8000/api/os')
+  // async function getOs()
+  // {
+  //   try {
+  //     const response = await axios.get('http://127.0.0.1:8000/api/os')
 
-      const data = response.data;
+  //     const data = response.data;
 
-      setOs(data)
+  //     setOs(data)
     
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   async function getOsStatus()
   {
@@ -50,80 +49,117 @@ export function Dashboard() {
     }
   }
 
+
+  async function getClientes()
+  {
+    try {
+      const response = await axios.get('http://127.0.0.1:8000/api/clientes')
+
+      const data = response.data;
+      // console.log(data)
+
+      setClientes(data)
+    
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
-    getOs();
+    getClientes();
+    // getOs();
     getOsStatus();
   }, []);
 
   return (
     <>
-    
-      <div style={{backgroundColor: '#f1f1ef', height: '1300px'}}>
 
-        <Sidebar />
-
-        <div style={{padding: '20px', marginLeft: '19.0rem'}}>
-
-
-          {/* <button 
-            onClick={() => setShowModal(true)}
-            className="bg-red-400 text-black px-3 py-2 rounded hover:scale-95 transition text-xl">
-            Open Modal
-          </button> */}
-
-          <ModalX onClose={handleOnClose} visible={showModal}/>
-
-         
-          <Button
-            onClick={(e) => setShowModal(true)}
-            size="g"
-            variant="primary"
-          >
-            {' '} + Abrir nova{' '}
-          </Button>
-     
-
-          <Button
-            size="g"
-            variant="outline"
-          >
-            {' '} Atualizar {' '}
-          </Button>
-
-          {/* <Modal showModal={showModal} setShowModal={setShowModal} /> */}
-
-        </div>
+      <div className= "bg-back h-screen w-screen overflow-hidden flex flex-row">
         
-        {/* 
-        <div style={{  marginLeft: '20rem'}}>
-            <Input/>
-        </div> */}
+        <SidebarX />
         
-        <div style={{  marginLeft: '20rem'}}>
-          <div className="relative z-0 w-full mb-6 group">
-            <input type="text" id="cliente" className="block py-2.5 px-0 w-full text-sm text-gray-400  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-            <label htmlFor="floating_cliente" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> Digite algo para filtrar </label>
+        <div className="flex-1 p-4 overflow-auto ">
+          
+          <div className="pl-2.5 m-auto">
+            <Button
+              onClick={(e) => setShowModal(true)}
+              size="g"
+              variant="primary"
+            >
+              {' '} + Abrir nova{' '}
+            </Button>
+      
+            <Button
+              size="g"
+              variant="outline"
+            >
+              Atualizar
+            </Button>
           </div>
+
+
+          <div className="flex flex-col flex-1 py-4 p-4">
+            <div className="relative z-0 w-full group">
+              <input type="text" id="cliente" className="block py-2.5 px-0 w-full text-sm text-gray-400  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+              <label htmlFor="floating_cliente" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> Digite algo para filtrar </label>
+            </div>
+          </div>
+
+          <ModalX request={clientes} onClose={handleOnClose} visible={showModal}/>
+
+
+          <div className="flex flex-col flex-1 py-4 p-4">
+
+            {osStatus.map((item, index) => {
+              console.log('item', item.lista_de_os)
+              return (   
+                
+                <div key={index} style={{marginTop: '20px', backgroundColor: '#fff'}}>
+                  {item.lista_de_os.length === 0 && (<> <Table4 data={null} nome={item.no_os_status} columns={null} hover={true} striped={true} /> </>)}
+                  {item.lista_de_os.length > 0 && (<> <Table4 data={item.lista_de_os} nome={item.no_os_status} columns={null} hover={true} striped={true} /> </>)}
+                </div>
+              )
+            })}
+          
+          </div>
+
         </div>
 
 
-        {osStatus.map((item, index) => {
-          return (   
-            <div key={index} style={{padding: '30px', marginTop: '20px', backgroundColor: '#fff', marginLeft: '20rem'}}>
-            
-              <Text size="headingSmall">
-                { item.no_os_status }
-              </Text>
 
-              <TableX data={item.lista_de_os} columns={null} hover={true} striped={true} />
 
-            </div>
-          )
-        })}
 
+			</div>
+
+
+
+      {/* <div className="grid grid-cols-4 gap-1">
+        <div className="col-span-1" style={{ backgroundColor: `${getRandomColor()}`}}> 01 </div>
+        <div className="col-start-n col-end-n" style={{ backgroundColor: `${getRandomColor()}`}}> 02 </div>
+        <div style={{ backgroundColor: `${getRandomColor()}`}}> 03 </div>
+        <div style={{ backgroundColor: `${getRandomColor()}`}}> 04 </div>
       </div>
-    
+
+      <div className="grid grid-rows-4 grid-cols-4 gap-1">
+        <div className="col-span-3" style={{ backgroundColor: `${getRandomColor()}`}}> 01 </div>
+        <div className="col-start-n col-end-n" style={{ backgroundColor: `${getRandomColor()}`}}> 02 </div>
+        <div style={{ backgroundColor: `${getRandomColor()}`}}> 03 </div>
+        <div style={{ backgroundColor: `${getRandomColor()}`}}> 04 </div>
+      </div> */}
+
+
+      {/* <div className="grid grid-cols-4 gap-1">
+        <div className="col-span-1 w-full h-full" style={{ backgroundColor: `${getRandomColor()}`}}> 01 </div>
+        <div className="col-span-3 w-full h-full" style={{ backgroundColor: `${getRandomColor()}`}}> 02 </div>
+      </div> */}
+
+
+
     </>
-    
   )
+}
+
+
+function getRandomColor() {
+  return "#" + ((1<<24)*Math.random() | 0 ).toString(16);
 }

@@ -1,4 +1,4 @@
-import { Dashboard } from './Dashboard'
+import { Dashboard } from './DashboardY'
 
 export default {
   title: 'Pages/Dashboard',

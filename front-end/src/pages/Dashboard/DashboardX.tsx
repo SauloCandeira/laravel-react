@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import SidebarX from "../../components/SidebarX/SidebarX";
 
-export function DashboardY() {
+export function DashboardX() {
 
   const [showModal, setShowModal] = useState(false)
   const [os, setOs] = useState([]);
@@ -37,6 +37,8 @@ export function DashboardY() {
     }
   }
 
+
+
   async function getOsStatus()
   {
     try {
@@ -54,6 +56,7 @@ export function DashboardY() {
   useEffect(() => {
     getOs();
     getOsStatus();
+    // getClientes()
   }, []);
 
   return (
