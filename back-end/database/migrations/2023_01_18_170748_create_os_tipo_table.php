@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('os_tipo', function (Blueprint $table) {
 			$table->integer('id_os_tipo', true);
-			$table->integer('id_fornecedor')->nullable()->index('ix_fk_fornecedor__os_tipo');
+			$table->integer('id_empresa')->index('ix_fk_empresa__os_tipo');
 			$table->string('no_os_tipo', 100)->nullable();
 			$table->string('ref_os_tipo', 100)->nullable();
             $table->boolean('is_envia_email')->default(true);

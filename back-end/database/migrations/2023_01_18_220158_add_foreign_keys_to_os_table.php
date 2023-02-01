@@ -27,6 +27,24 @@ return new class extends Migration
             $table->foreign('id_os', 'fk_os__os_funcionario')->references('id_os')->on('os')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('id_funcionario', 'fk_funcionario__os_funcionario')->references('id_funcionario')->on('funcionario')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
+
+        Schema::table('funcionario', function(Blueprint $table)
+		{
+            $table->foreign('id_empresa', 'fk_empresa__funcionario')->references('id_empresa')->on('empresa')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+		});
+
+        Schema::table('os_tipo', function(Blueprint $table)
+		{
+            $table->foreign('id_empresa', 'fk_empresa__os_tipo')->references('id_empresa')->on('empresa')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+		});
+
+
+        Schema::table('os_resposta', function(Blueprint $table)
+		{
+            $table->foreign('id_os', 'fk_os__os_resposta')->references('id_os')->on('os')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('id_os_status', 'fk_os_status__os_resposta')->references('id_os_status')->on('os_status')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+        });
+
     }
 
     /**
@@ -48,7 +66,24 @@ return new class extends Migration
         Schema::table('os_funcionario', function(Blueprint $table)
 		{
             $table->dropForeign('fk_os__os_funcionario');
-
 		});
+
+        Schema::table('funcionario', function(Blueprint $table)
+		{
+            $table->dropForeign('fk_empresa__funcionario');
+		});
+
+        Schema::table('os_tipo', function(Blueprint $table)
+		{
+            $table->dropForeign('fk_empresa__os_tipo');
+		});
+
+
+        Schema::table('os_resposta', function(Blueprint $table)
+		{
+            $table->dropForeign('fk_os__os_resposta');
+            $table->dropForeign('fk_os_status__os_resposta');
+		});
+
     }
 };

@@ -18,6 +18,7 @@ class OsController extends Controller
         return $os;
     }
 
+
     public function searchStatus()
     {
         $lista = OsStatus::with('listaDeOs', 'listaDeOs.condominio', 'listaDeOs.status', 'listaDeOs.tipo', 'listaDeOs.osfuncionario', 'listaDeOs.funcionario', 'listaDeOs.listaFuncionarios')->get();

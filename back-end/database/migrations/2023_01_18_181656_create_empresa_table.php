@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('empresa', function (Blueprint $table) {
             $table->integer('id_empresa', true);
             $table->string('no_empresa', 100);
+            $table->dateTime('dt_inicio')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->dateTime('dt_fim')->nullable();
         });
     }
 

@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('condominio', function (Blueprint $table) {
             $table->integer('id_condominio', true);
             $table->string('no_condominio', 100);
+            $table->dateTime('dt_inicio')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->dateTime('dt_fim')->nullable();
         });
     }
 
