@@ -23,3 +23,4 @@ Dependencias:
 # FONTE:
 
 Dashboard: https://www.youtube.com/watch?v=yZBWJ0yQv8Y
+Autocomplete tailwind: https://www.youtube.com/watch?v=YybooIn2-JM

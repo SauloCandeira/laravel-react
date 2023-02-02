@@ -1,12 +1,12 @@
 import "./styles.css";
 // import { Tablex } from './styles'
-import { Button } from "../Buttons/Button";
-import { Avatar } from "../Avatar/Avatar";
-import { Label } from "../Label/Label"
+import { Button } from "../../Buttons/Button";
+import { Avatar } from "../../Avatar/Avatar";
+import { Label } from "../../Label/Label"
 import { format } from 'date-fns';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
-import ModalY  from "../ModalY/ModalY"
+import ModalX from "../../Modals/ModalX/ModalX";
 
 export type TableProps = {
   children: string;
@@ -75,7 +75,7 @@ export function TableX({ data , hover = true, striped = true, variant }: TablePr
                         {' '}Ver{' '} 
                       </Button>
 
-                      <ModalY onClose={handleOnClose} visible={showModal}/>
+                      <ModalX onClose={handleOnClose} visible={showModal}/>
 
                       <Link to={'/arquivar/' + Client.id_os}> 
                         <Button 

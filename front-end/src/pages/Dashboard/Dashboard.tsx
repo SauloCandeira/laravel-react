@@ -3,10 +3,11 @@ import SidebarX from "../../components/SidebarX/SidebarX";
 import { Button } from "../../components/Buttons/Button";
 import axios from 'axios';
 import { useEffect, useState } from "react";
-import  ModalX  from "../../components/ModalX/ModalX";
-import { TableX } from "../../components/TableX/TableX";
-import Table4  from "../../components/Table4/Table4";
+import ModalX from "../../components/Modals/ModalX/ModalX";
+import { TableX } from "../../components/Tables/TableX/TableX";
+import Table4  from "../../components/Tables/Table4/Table4";
 import { Text } from "../../components/Texts/Text";
+import ModalZ from "../../components/Modals/ModalZ/ModalZ";
 
 export default function Dashboard() {
 
@@ -105,8 +106,8 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <ModalX request={clientes} onClose={handleOnClose} visible={showModal}/>
-
+          {/* <ModalX request={clientes} onClose={handleOnClose} visible={showModal}/> */}
+          <ModalX request={clientes}  onClose={handleOnClose} visible={showModal}/>
 
           <div className="flex flex-col flex-1 py-4 p-4">
 

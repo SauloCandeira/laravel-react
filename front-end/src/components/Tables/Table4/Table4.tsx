@@ -1,12 +1,12 @@
 import "./styles.css";
 // import { Tablex } from './styles'
-import { Button } from "../Buttons/Button";
-import { Avatar } from "../Avatar/Avatar";
-import { Label } from "../Label/Label"
+import { Button } from "../../Buttons/Button";
+import { Avatar } from "../../Avatar/Avatar";
+import { Label } from "../../Label/Label"
 import { format } from 'date-fns';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
-import ModalY  from "../ModalY/ModalY"
+import ModalY  from "../../Modals/ModalY/ModalY"
 
 export type TableProps = {
   children: string;

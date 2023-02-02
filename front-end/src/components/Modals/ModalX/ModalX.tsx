@@ -1,5 +1,10 @@
 import { FormEvent, useState, useEffect }from 'react';
 import axios from 'axios';
+import InputX  from '../../Inputs/InputX/InputX';
+import InputY from '../../Inputs/InputY/InputY';
+import InputZ from '../../Inputs/InputZ/InputZ';
+import InputW from '../../Inputs/InputW/InputW';
+import InputA from '../../Inputs/InputA/InputA';
 
 const defaultFormData = {
   cliente: "",
@@ -10,7 +15,7 @@ const defaultFormData = {
   descricao: ""
 };
 
-export type ModalProps = {
+export type ModalXProps = {
   request: Object
   visible: Boolean
   onClose: any
@@ -20,8 +25,13 @@ export type ModalProps = {
 export default function ModalX({ request, visible, onClose } : ModalProps ) {
 
 
-  // console.log('data', request)
+  console.log('data', request)
+  const [selectedOption, setSelectedOption] = useState("");
+  const [text, setText] = useState("")
   const [clientes, setClientes] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("")
+  const [selected, setSelected] = useState("")
   const [formData, setFormData] = useState(defaultFormData);
   const { cliente, tipo, data, prioridade, funcionarios, descricao } = formData;
 
@@ -63,58 +73,51 @@ export default function ModalX({ request, visible, onClose } : ModalProps ) {
       className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex items-center justify-center"
     >
 
-      <div className="bg-white p-5 rounded w-auto h-4/5 ">
+      <div className="bg-white p-5 rounded w-auto h-4/">
         
         <h1 className="font-thin text-left text-lg text-gray-700 pb-14 ">
          Abrir Ordem de Serviço (ModalX)
         </h1>
 
-        <form onSubmit={onSubmit}>
-          <div className="grid md:grid-cols-2 md:gap-6">
-            <div className="relative z-0 w-full mb-6 group">
+        <form onSubmit={onSubmit} className="relative">
 
-              <input type="select" id="cliente" onChange={onChange}  value={cliente} className="block py-2.5 px-0 w-full text-sm text-gray-400  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-              <label htmlFor="floating_cliente" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> Escolha o cliente </label>
-                 
+
+          <div className="grid md:grid-cols-2 md:gap-6">
+
+            <div className="relative z-50 w-full mb-6 group">
+              <InputZ 
+                  value={selectedOption}
+                  onChange={setSelectedOption}
+                  // value={text} 
+                  // onChange={(option) => setText(option)} 
+                  options={["Chennai", "Bangalore", "Mumbai"]} 
+                />
             </div>
-            <div className="relative z-0 w-full mb-6 group">
-                {/* <input type="text" name="floating_company" id="floating_company"  */}
-                <input type="text" id="tipo" onChange={onChange} value={tipo} className="block py-2.5 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> Escolha o tipo </label>
-            </div>
+
           </div>
 
           <div className="grid md:grid-cols-2 md:gap-6">
-            <div className="relative z-0 w-full mb-6 group">
-                <input type="date" id="data" onChange={onChange} value={data} className="block py-2.5 px-0 w-full text-sm text-gray-400  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                <label htmlFor="floating_cliente" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> Escolha o cliente </label>
-            </div>
-            <div className="relative z-0 w-full mb-6 group">
-                <input type="time" name="floating_company" id="floating_company" className="block py-2.5 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> Escolha o tipo </label>
-            </div>
+            <InputA />
+            <InputA />
           </div>
 
 
           <div className="grid md:grid-cols-2 md:gap-6">
-            <div className="relative z-0 w-full mb-6 group">
+            <div className="w-full mb-6 group">
                 <input type="select" id="prioridade" onChange={onChange} value={prioridade} className="block py-2.5 px-0 w-full text-sm text-gray-400  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                {/* <input type="text" name="floating_cliente" id="floating_cliente"  */}
                 <label htmlFor="floating_cliente" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> Prioridade </label>
             </div>
           </div>
 
 
 
-          <div className="relative z-0 w-full mb-6 group">
+          <div className="w-full mb-6 group">
               <input type="select" id="funcionarios" onChange={onChange} value={funcionarios} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-              {/* <input type="text" name="repeat_password" id="floating_repeat_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " /> */}
               <label htmlFor="floating_repeat_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> Funcionarios responsáveis </label>
           </div>
 
 
-          <div className="relative z-0 w-full mb-6 group">
-              {/* <input type="text" name="repeat_password" id="floating_repeat_password"  */}
+          <div className="w-full mb-6 group">
               <input type="text" id="descricao" onChange={onChange} value={descricao} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer pb-60" placeholder=" " required />
               <label htmlFor="floating_repeat_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> Problema relatado pelo cliente </label>
           </div>
@@ -130,9 +133,10 @@ export default function ModalX({ request, visible, onClose } : ModalProps ) {
           </div>
         
         </form>
-
-
       </div>
+
+
+
     </div>
   );
 }
