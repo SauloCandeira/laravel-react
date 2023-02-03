@@ -13,7 +13,8 @@ export default function DashboardX() {
 
   const [showModal, setShowModal] = useState(false)
   const [os, setOs] = useState([]);
-  const [clientes, setClientes] = useState([]);
+  const [empresas, setEmpresas] = useState([]);
+  const [tipos, setTipos] = useState([]);
   const [osStatus, setOsStatus] = useState([]);
 
   const handleOnClose = () => setShowModal(false)
@@ -51,7 +52,7 @@ export default function DashboardX() {
   }
 
 
-  async function getClientes()
+  async function getEmpresas()
   {
     try {
       const response = await axios.get('http://127.0.0.1:8000/api/clientes')
@@ -59,15 +60,37 @@ export default function DashboardX() {
       const data = response.data;
       // console.log(data)
 
-      setClientes(data)
+      setEmpresas(data)
     
     } catch (error) {
       console.log(error);
     }
   }
 
+  async function getTipos()
+  {
+    try {
+      const response = await axios.get('http://127.0.0.1:8000/api/tipos')
+
+      const data = response.data;
+      // console.log(data)
+
+      setTipos(data)
+    
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+
+
+
+
+
   useEffect(() => {
-    getClientes();
+    getEmpresas();
+    getTipos();
     // getOs();
     getOsStatus();
   }, []);
@@ -107,7 +130,7 @@ export default function DashboardX() {
           </div>
 
           {/* <ModalX request={clientes} onClose={handleOnClose} visible={showModal}/> */}
-          <ModalX request={clientes}  onClose={handleOnClose} visible={showModal}/>
+          <ModalX empresas={empresas} tipos={tipos} onClose={handleOnClose} visible={showModal}/>
 
           <div className="flex flex-col flex-1 py-4 p-4">
 

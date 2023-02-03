@@ -57,7 +57,7 @@ export function InputZ({value, onChange, options}) {
       }
     }
 
-    let filteredOptions = options.filter(option => option.includes(value))
+    // let filteredOptions = options.filter(option => option.includes(value))
 
 
     useEffect(() => {

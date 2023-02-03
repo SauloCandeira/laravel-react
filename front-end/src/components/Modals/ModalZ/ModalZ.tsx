@@ -36,7 +36,7 @@ export default function ModalZ({request, visible, onClose}:ModalZProps) {
         >
 
 
-          <div className="grid md:grid-cols-2 md:gap-6">
+          <div className="grid md:grid-cols-2 md:gap-4">
             <div className="mb-6 group">
               <InputZ
                 value={selectedOption}
@@ -58,7 +58,7 @@ export default function ModalZ({request, visible, onClose}:ModalZProps) {
           </div>
 
 
-          <div className="grid md:grid-cols-2 md:gap-6">
+          <div className="grid md:grid-cols-2 md:gap-4">
             <div className="mb-6 group">
               
                 <InputZ 
@@ -76,7 +76,7 @@ export default function ModalZ({request, visible, onClose}:ModalZProps) {
           </div>
 
 
-          <div className="grid md:grid-cols-2 md:gap-6">
+          <div className="grid md:grid-cols-2 md:gap-4">
             <div className="mb-6 group">
               
                 <InputZ 
