@@ -17,7 +17,7 @@ class EmpresaSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        for($i = 1; $i<=4; $i++) {
+        for($i = 1; $i<=10; $i++) {
             DB::table('empresa')->insert([
                 'no_empresa' =>  $faker->company(),
             ]);

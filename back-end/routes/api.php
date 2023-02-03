@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\OsController;
 use App\Http\Controllers\API\EmpresaController;
+use App\Http\Controllers\API\TipoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,9 @@ Route::get('/funcionarios', [OsController::class, 'searchFuncionarios']);
 
 // Clientes
 Route::get('/clientes', [EmpresaController::class, 'searchClientes']);
+
+// Tipos
+Route::get('/tipos', [TipoController::class, 'searchTipos']);
 
 
 
