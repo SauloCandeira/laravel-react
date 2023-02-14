@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('/os', [OsController::class, 'store']);
 Route::put('/os/{id}', [OsController::class, 'update']);
 Route::get('/os', [OsController::class, 'search']);
-Route::get('/os/{id}', [OsController::class, 'search']);
-Route::delete('/os/{id}', [OsController::class, 'search']);
+Route::get('/os/{id}', [OsController::class, 'searchId']);
+// Route::delete('/os/{id}', [OsController::class, 'search']);
 Route::get('/os-status', [OsController::class, 'searchStatus']);
 
 // Funcionarios

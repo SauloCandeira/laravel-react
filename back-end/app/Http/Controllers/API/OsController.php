@@ -19,6 +19,18 @@ class OsController extends Controller
     }
 
 
+    public function searchId($id)
+    {
+
+        $os = Os::with('condominio', 'status', 'tipo', 'osfuncionario', 'funcionario')->where('id_os', $id)->first();
+
+        // $os = Os::find($id);
+        // $os = Os::with('condominio', 'status', 'tipo', 'osfuncionario', 'funcionario')->whereIn('id', $id)->get();
+        // dd($os);
+        return $os;
+    }
+
+
     public function searchStatus()
     {
         $lista = OsStatus::with('listaDeOs', 'listaDeOs.condominio', 'listaDeOs.status', 'listaDeOs.tipo', 'listaDeOs.osfuncionario', 'listaDeOs.funcionario', 'listaDeOs.listaFuncionarios')->get();
@@ -43,12 +55,15 @@ class OsController extends Controller
     public function store(Request $request)
     {
         $os = new Os;
-        $os->cliente = $request->input('cliente');
-        $os->tipo = $request->input('tipo');
-        $os->data = $request->input('data');
-        $os->prioridade = $request->input('prioridade');
-        $os->funcionarios = $request->input('funcionarios');
-        $os->descricao = $request->input('descricao');
+        $os->id_os_status = 6;
+        $os->id_funcionario = 1;
+        $os->id_condominio = $request->input('condominio');
+        $os->id_empresa = $request->input('cliente');
+        $os->id_os_tipo = $request->input('tipo');
+        $os->dt_agendamento = $request->input('data');
+        $os->nu_prioridade = $request->input('prioridade');
+        $os->id_funcionario = $request->input('funcionarios');
+        $os->ds_os = $request->input('descricao');
         $os->save();
 
         return response()->json([

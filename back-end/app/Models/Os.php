@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Os extends Model
 {
+    public $timestamps = false;
     use HasFactory;
     protected $table = 'os';
     protected $primaryKey = 'id_os';

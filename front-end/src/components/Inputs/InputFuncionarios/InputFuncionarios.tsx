@@ -6,20 +6,29 @@ export type InputXProps = {
 }
 
 
-export function InputTipos({request, handleResult} : InputXProps) {
+export function InputFuncionarios({request, handleResult} : InputXProps) {
 
+  console.log('request funcionario', request)
   const [open, setOpen] = useState(false);
 
   // const [clientes, setClientes] = useState([]);
   const [inputValue, setInputValue] = useState("")
   const [selected, setSelected] = useState("")
-  const [inputKey, setInputKey] = useState("")
+  const [inputKey, setInputKey] = useState([])
 
 
   handleResult(inputKey)
+
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    const checked = e.target.checked;
+    console.log(value, checked)
+  }
+
   return (
     <>
-      <div className="relative z-40 w-full mb-6 group">
+      <div className="relative z-20 w-full mb-6 group">
 
         <input 
           autoComplete="off"
@@ -36,7 +45,7 @@ export function InputTipos({request, handleResult} : InputXProps) {
           htmlFor="floating_cliente" 
           className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         > 
-          Escolha o tipo 
+          Funcionário
         </label>
         
         <ul 
@@ -44,25 +53,42 @@ export function InputTipos({request, handleResult} : InputXProps) {
           ${open ? 'absolute' : 'hidden'}`}>
 
           {request.map((item) => (
+
             <li 
-              key={item.id_os_tipo} 
+              key={item} 
               className={`z-40 p-2 text-sm hover:bg-gray-400 
-              ${item.no_os_tipo.toLowerCase() === selected?.toLowerCase() &&
+              ${item.toLowerCase() === selected?.toLowerCase() &&
               'bg-gray-100 text-black'  }
-              ${item.no_os_tipo.toLowerCase().startsWith(inputValue)
+              ${item.toLowerCase().startsWith(inputValue)
                 ? "block"
                 : "hidden"
               }`}
               onClick={() => {
-                if(item.no_os_tipo.toLowerCase() !== selected.toLowerCase()){
-                  setInputValue(item.no_os_tipo)
+                if(item.toLowerCase() !== selected.toLowerCase()){
+                  setInputValue(item)
                   setOpen(false)
-                  setInputKey(item.id_os_tipo)
                 }
               }}
             >
 
-              {item.no_os_tipo}
+              {/* <div className="form-check">
+                <input className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckDefault" />
+                <label className="form-check-label inline-block text-gray-800" htmlFor="flexCheckDefault">
+                  {item}
+                </label>
+              </div> */}
+              
+
+              <input 
+                type="checkbox" 
+                className="border-gray-300 rounded h-5 w-5" 
+                onChange={handleChange}
+              />
+              
+              <label htmlFor="checkbox" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{item}</label>
+
+
+              {/* {item} */}
             </li>
           ))}
 
@@ -75,4 +101,4 @@ export function InputTipos({request, handleResult} : InputXProps) {
 }
 
 
-export default InputTipos;
+export default InputFuncionarios;

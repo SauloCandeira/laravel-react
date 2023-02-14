@@ -6,13 +6,17 @@ export type InputXProps = {
 }
 
 
-export function InputClientes({request} : InputXProps) {
+export function InputClientes({request, onChange, value, handleResult} : InputXProps) {
 
+  // console.log(request)
   const [open, setOpen] = useState(false);
 
   // const [clientes, setClientes] = useState([]);
   const [inputValue, setInputValue] = useState("")
   const [selected, setSelected] = useState("")
+  const [inputKey, setInputKey] = useState("")
+
+  handleResult(inputKey)
 
   return (
     <>
@@ -41,8 +45,9 @@ export function InputClientes({request} : InputXProps) {
           ${open ? 'absolute' : 'hidden'}`}>
 
           {request.map((item) => (
+
             <li 
-              key={item.no_empresa} 
+              key={item.id_empresa} 
               className={`p-2 text-sm hover:bg-gray-400 
               ${item.no_empresa.toLowerCase() === selected?.toLowerCase() &&
               'bg-gray-100 text-black'  }
@@ -54,6 +59,7 @@ export function InputClientes({request} : InputXProps) {
                 if(item.no_empresa.toLowerCase() !== selected.toLowerCase()){
                   setInputValue(item.no_empresa)
                   setOpen(false)
+                  setInputKey(item.id_empresa)
                 }
               }}
             >

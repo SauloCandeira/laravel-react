@@ -135,7 +135,7 @@ export default function DashboardX() {
           <div className="flex flex-col flex-1 py-4 p-4">
 
             {osStatus.map((item, index) => {
-              console.log('item', item.lista_de_os)
+              // console.log('item', item.lista_de_os)
               return (   
                 
                 <div key={index} style={{marginTop: '20px', backgroundColor: '#fff'}}>

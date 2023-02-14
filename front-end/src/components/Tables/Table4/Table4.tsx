@@ -19,8 +19,10 @@ export type TableProps = {
 }
 
 export default function Table4({ data ,nome, hover = true, striped = true, variant }: TableProps) { 
-    const [showModal, setShowModal] = useState(false)
-    const handleOnClose = () => setShowModal(false)
+    // const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState({ isOpen: false, postId: null });
+    // const [state, setState] = useState({ isOpen: false, postId: null });
+    const handleOnClose = () => setShowModal({ isOpen: false, postId: null})
   
     
     return (
@@ -73,13 +75,15 @@ export default function Table4({ data ,nome, hover = true, striped = true, varia
 
                                         <div className="flex flex-row">
                                             <Button 
-                                                onClick={() => setShowModal(true)}
+                                                // onClick={() => setShowModal(true)}
+
+                                                onClick={() =>  setShowModal({ isOpen: true, postId: Client.id_os  })}
                                                 size="p" 
                                                 variant="quaternary"> 
                                                 {' '}Ver{' '} 
                                             </Button>
 
-                                            <ModalY onClose={handleOnClose} visible={showModal}/>
+                                            <ModalY onClose={handleOnClose} id={showModal.postId} visible={showModal.isOpen}/>
 
                                             <Link to={'/arquivar/' + Client.id_os}> 
                                                 <Button 

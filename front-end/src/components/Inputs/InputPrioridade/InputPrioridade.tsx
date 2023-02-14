@@ -6,13 +6,17 @@ export type InputXProps = {
 }
 
 
-export function InputPrioridade({request} : InputXProps) {
+export function InputPrioridade({request,handleResult} : InputXProps) {
+
+  // console.log(request)
 
   const [open, setOpen] = useState(false);
 
   // const [clientes, setClientes] = useState([]);
   const [inputValue, setInputValue] = useState("")
+  const [inputKey, setInputKey] = useState("")
   const [selected, setSelected] = useState("")
+  handleResult(inputKey)
 
   return (
     <>
@@ -42,23 +46,24 @@ export function InputPrioridade({request} : InputXProps) {
 
           {request.map((item) => (
             <li 
-              key={item} 
+              key={item.id_prioridade} 
               className={`z-40 p-2 text-sm hover:bg-gray-400 
-              ${item.toLowerCase() === selected?.toLowerCase() &&
+              ${item.no_prioridade.toLowerCase() === selected?.toLowerCase() &&
               'bg-gray-100 text-black'  }
-              ${item.toLowerCase().startsWith(inputValue)
+              ${item.no_prioridade.toLowerCase().startsWith(inputValue)
                 ? "block"
                 : "hidden"
               }`}
               onClick={() => {
-                if(item.toLowerCase() !== selected.toLowerCase()){
-                  setInputValue(item)
+                if(item.no_prioridade.toLowerCase() !== selected.toLowerCase()){
+                  setInputValue(item.no_prioridade)
                   setOpen(false)
+                  setInputKey(item.id_prioridade)
                 }
               }}
             >
 
-              {item}
+              {item.no_prioridade}
             </li>
           ))}
 
