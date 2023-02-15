@@ -8,6 +8,7 @@ import { TableX } from "../../components/Tables/TableX/TableX";
 import Table4  from "../../components/Tables/Table4/Table4";
 import { Text } from "../../components/Texts/Text";
 import ModalZ from "../../components/Modals/ModalZ/ModalZ";
+import { FaHome, FaPlus, FaEye, FaSyncAlt} from 'react-icons/fa'
 
 export default function DashboardX() {
 
@@ -110,14 +111,21 @@ export default function DashboardX() {
               size="g"
               variant="primary"
             >
-              {' '} + Abrir nova{' '}
+              {/* <FaHome className="" /> */}
+              <div className="text-center inline-flex items-center mr-2 ">
+                <FaPlus className="m-2" /> Abrir nova 
+              </div>
+             
             </Button>
       
             <Button
               size="g"
               variant="outline"
             >
-              Atualizar
+              <div className="text-center inline-flex items-center mr-2 ">
+                <FaSyncAlt className="m-2" /> Atualizar
+              </div>
+             
             </Button>
           </div>
 

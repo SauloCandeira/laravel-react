@@ -42,4 +42,9 @@ class Os extends Model
         return $this->hasMany(OsFuncionario::class, 'id_os');
     }
 
+    public function listaRespostas()
+    {
+        return $this->hasMany(OsResposta::class, 'id_os');
+    }
+
 }

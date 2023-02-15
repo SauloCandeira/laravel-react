@@ -8,6 +8,7 @@ import InputA from '../../Inputs/InputA/InputA';
 import { InputTipos } from '../../Inputs/InputTipos/InputTipos';
 import InputPrioridade from '../../Inputs/InputPrioridade/InputPrioridade';
 import InputProblema from '../../Inputs/InputProblema/InputProblema';
+import { FaTimes } from 'react-icons/fa';
 import InputFuncionarios from '../../Inputs/InputFuncionarios/InputFuncionarios';
 import InputFuncionariosB from '../../Inputs/InputFuncionariosB/InputFuncionariosB';
 
@@ -110,13 +111,19 @@ export default function ModalX({ empresas, tipos , visible, onClose } : ModalPro
 
   return (
     <div 
-      id="container"
-      onClick={handleOnClose}
+      // id="container"
+      // onClick={handleOnClose}
       className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex items-center justify-center"
     >
 
-      <div className="bg-white p-5 rounded w-auto h-4/">
+      <div className="relative bg-white p-5 rounded w-auto h-4/5">
         
+        <FaTimes
+          className="absolute right-5 cursor-pointer m-1"
+          id="container"
+          onClick={handleOnClose}
+        />
+
         <h1 className="font-thin text-left text-lg text-gray-700 pb-14 ">
          Abrir Ordem de Serviço (ModalX)
         </h1>

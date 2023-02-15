@@ -42,6 +42,7 @@ return new class extends Migration
         Schema::table('os_resposta', function(Blueprint $table)
 		{
             $table->foreign('id_os', 'fk_os__os_resposta')->references('id_os')->on('os')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('id_funcionario', 'fk_funcionario__os_resposta')->references('id_funcionario')->on('funcionario')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('id_os_status', 'fk_os_status__os_resposta')->references('id_os_status')->on('os_status')->onUpdate('RESTRICT')->onDelete('RESTRICT');
         });
 
@@ -82,6 +83,7 @@ return new class extends Migration
         Schema::table('os_resposta', function(Blueprint $table)
 		{
             $table->dropForeign('fk_os__os_resposta');
+            $table->dropForeign('fk_funcionario__os_resposta');
             $table->dropForeign('fk_os_status__os_resposta');
 		});
 

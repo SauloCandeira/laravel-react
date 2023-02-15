@@ -11,6 +11,7 @@ use Database\Seeders\CondominioSeeder;
 use Database\Seeders\OsStatusSeeder;
 use Database\Seeders\OsTipoSeeder;
 use Database\Seeders\OsSeeder;
+use Database\Seeders\OsRespostaSeeder;
 
 
 
@@ -30,5 +31,6 @@ class DatabaseSeeder extends Seeder
         $this->call([OsTipoSeeder::class]);
         $this->call([OsSeeder::class]);
         $this->call([OsFuncionarioSeeder::class]);
+        $this->call([OsRespostaSeeder::class]);
     }
 }

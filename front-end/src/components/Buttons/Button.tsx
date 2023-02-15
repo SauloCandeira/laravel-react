@@ -1,8 +1,8 @@
 import { Container, variantToColor, variantToSize } from "./styles";
-
+import { useState, InputHTMLAttributes, ReactNode } from 'react';
 
 export type ButtonProps = {
-    children: string;
+    children: ReactNode;
     size: 'p' | 'm' | 'g';
     variant: 'primary' | 'secondary' | 'outline' | 'quaternary' | 'tertiary';
     onClick: any,

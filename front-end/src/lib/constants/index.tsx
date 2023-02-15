@@ -18,7 +18,8 @@ import {
 	FaIdCardAlt, 
 	FaRegFileAlt,
 	FaRegCalendarAlt,
-	FaChartBar
+	FaChartBar,
+	FaDesktop
 } from 'react-icons/fa'
 
 export const DASHBOARD_SIDEBAR_LINKS = [
@@ -26,20 +27,20 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		key: 'dashboard',
 		label: 'Dashboard',
 		path: '/',
-		icon: <FaHome />
+		icon: <FaDesktop className="h-3" />
 	},
-	{
-		key: 'products',
-		label: 'Dashboard Y',
-		path: '/dashboardY',
-		icon: <HiOutlineCube />
-	},
-	{
-		key: 'orders',
-		label: 'Dashboard X',
-		path: '/dashboardX',
-		icon: <HiOutlineShoppingCart />
-	},
+	// {
+	// 	key: 'products',
+	// 	label: 'Dashboard Y',
+	// 	path: '/dashboardY',
+	// 	icon: <HiOutlineCube />
+	// },
+	// {
+	// 	key: 'orders',
+	// 	label: 'Dashboard X',
+	// 	path: '/dashboardX',
+	// 	icon: <HiOutlineShoppingCart />
+	// },
 	// {
 	// 	key: 'customers',
 	// 	label: 'Customers',

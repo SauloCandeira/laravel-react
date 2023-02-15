@@ -58,7 +58,7 @@ export default function ModalY({ visible, onClose, id}) {
     }
   }
 
-  console.log(os.funcionario)
+  console.log(os)
   // console.log(format(new Date(os.dt_inicio), 'yyyy/MM/dd'))
 
   // console.log(os?.dt_inicio)

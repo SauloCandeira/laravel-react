@@ -22,7 +22,7 @@ class OsController extends Controller
     public function searchId($id)
     {
 
-        $os = Os::with('condominio', 'status', 'tipo', 'osfuncionario', 'funcionario')->where('id_os', $id)->first();
+        $os = Os::with('listaRespostas', 'funcionario','condominio', 'status', 'tipo', 'osfuncionario', 'funcionario')->where('id_os', $id)->first();
 
         // $os = Os::find($id);
         // $os = Os::with('condominio', 'status', 'tipo', 'osfuncionario', 'funcionario')->whereIn('id', $id)->get();
@@ -33,7 +33,7 @@ class OsController extends Controller
 
     public function searchStatus()
     {
-        $lista = OsStatus::with('listaDeOs', 'listaDeOs.condominio', 'listaDeOs.status', 'listaDeOs.tipo', 'listaDeOs.osfuncionario', 'listaDeOs.funcionario', 'listaDeOs.listaFuncionarios')->get();
+        $lista = OsStatus::with('listaDeOs', 'listaDeOs.condominio', 'listaDeOs.status', 'listaDeOs.tipo', 'listaDeOs.osfuncionario', 'listaDeOs.funcionario', 'listaDeOs.listaFuncionarios', 'listaDeOs.listaRespostas')->get();
 
         return $lista;
     }

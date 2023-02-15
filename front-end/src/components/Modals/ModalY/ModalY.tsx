@@ -1,6 +1,7 @@
 import { FormEvent, useState, useEffect}from 'react';
 import { format, parseISO } from 'date-fns';
 import axios from 'axios';
+import { FaTimes } from 'react-icons/fa';
 
 const defaultFormData = {
   cliente: "",
@@ -58,7 +59,7 @@ export default function ModalY({ visible, onClose, id}) {
     }
   }
 
-  console.log(os.funcionario)
+  // console.log(os.lista_respostas)
   // console.log(format(new Date(os.dt_inicio), 'yyyy/MM/dd'))
 
   // console.log(os?.dt_inicio)
@@ -74,6 +75,7 @@ export default function ModalY({ visible, onClose, id}) {
 
   const handleOnClose = (e) => {
     if(e.target.id === "container")
+    console.log('clickou')
     onClose()
   };
 
@@ -86,20 +88,26 @@ export default function ModalY({ visible, onClose, id}) {
 
   const timeout = setTimeout(function(){
     const dateFormat =  format(new Date(os.dt_inicio), 'ddMMyyyy')+-os.id_os
-    console.log(dateFormat)
+    // console.log(dateFormat)
     setNumeroOs(dateFormat)
   }, 100) //Após 3 segundos a função é executada.
   
   return (
     
     <div 
-      id="container"
-      onClick={handleOnClose}
+      // id="container"
+      // onClick={handleOnClose}
       className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex items-center justify-center"
     >
 
-      <div className="bg-white p-5 rounded w-auto h-5/5 ">
-        
+      <div className="relative bg-white p-5 rounded w-auto h-5/5 ">
+
+        <FaTimes
+          className="absolute right-5 cursor-pointer m-1"
+          id="container"
+          onClick={handleOnClose}
+        />
+
         <h1 className="font-thin text-left text-lg text-gray-700 pb-6 ">
          Ordem de Serviço (Modal Y)
         </h1>
@@ -188,33 +196,39 @@ export default function ModalY({ visible, onClose, id}) {
 
             </div>
 
-            <div className="grid md:grid-cols-1 px-5">
+            <div className="grid md:grid-cols-1 px-5 ">
+              
+              <div className="grid grid-rows-5 grid-flow-col gap-2">
 
-              <div className="relative z-0 p-8 h-1/5 w-full bg-gray-100">
-                <h4> Nome do funcionario
-                  
-                  <span style={{padding: '20px'}} >
-                    13/02/23 as 15:15
-                  </span>
+                {os.lista_respostas?.map((item, index) => {
+                  console.log('item', item)
+                  return (   
 
-                </h4>
+                    <div className="relative z-0 p-8 h-36 w-full bg-gray-100 rounded-lg">
+                      <h4> {item.id_funcionario}
 
-                <span>
-                    A caminho - (Texto automatico)
-                </span>
+                        <span style={{padding: '20px'}} >
+                          {item.dt_inicio}
+                        </span>
 
-                <span className='absolute right-10 items-center justify-center' >
-                  <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-white rounded-full dark:bg-gray-600">
-                    <span className="font-medium text-gray-600 dark:text-gray-300">I</span>
-                  </div>
-                </span>
+                      </h4>
 
+                      <span>
+                          {item.ds_os_resposta}
+                      </span>
+
+                      <span className='absolute right-10 items-center justify-center' >
+                        <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-white rounded-full dark:bg-gray-600">
+                          <span className="font-medium text-gray-600 dark:text-gray-300">NF</span>
+                        </div>
+                      </span>
+                    </div>
+
+                  )
+                })}
 
               </div>
-
             </div>
-
-
           </div>
         
           <div className="text-right">
@@ -222,7 +236,10 @@ export default function ModalY({ visible, onClose, id}) {
               Voltar
             </button>
             <button type="submit" className="px-5 py-2 bg-gray-700 text-black rounded">
-              Abrir 
+              Salvar
+            </button>
+            <button type="submit" className="px-5 py-2 bg-gray-700 bg-blue text-white rounded">
+              Finalizar e enviar feedback
             </button>
           </div>
 
