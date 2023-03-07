@@ -20,7 +20,7 @@ export function InputPrioridade({request,handleResult} : InputXProps) {
 
   return (
     <>
-      <div className="relative z-40 w-full mb-6 group">
+      <div className="relative z-30 w-full mb-6 group">
 
         <input 
           autoComplete="off"
@@ -41,13 +41,13 @@ export function InputPrioridade({request,handleResult} : InputXProps) {
         </label>
         
         <ul 
-          className={`fixed z-40 bg-white w-full mt-2 overflow-auto border max-h-52 text-black
+          className={`fixed z-20 bg-white w-full mt-2 overflow-auto border max-h-52 text-black
           ${open ? 'absolute' : 'hidden'}`}>
 
           {request.map((item) => (
             <li 
               key={item.id_prioridade} 
-              className={`z-40 p-2 text-sm hover:bg-gray-400 
+              className={`z-20 p-2 text-sm hover:bg-gray-400 
               ${item.no_prioridade.toLowerCase() === selected?.toLowerCase() &&
               'bg-gray-100 text-black'  }
               ${item.no_prioridade.toLowerCase().startsWith(inputValue)

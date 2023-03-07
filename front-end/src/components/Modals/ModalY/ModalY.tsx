@@ -1,7 +1,7 @@
 import { FormEvent, useState, useEffect}from 'react';
 import { format, parseISO } from 'date-fns';
 import axios from 'axios';
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaSave } from 'react-icons/fa';
 
 const defaultFormData = {
   cliente: "",
@@ -71,13 +71,25 @@ export default function ModalY({ visible, onClose, id}) {
   //  console.log(format(new Date(parseISO(os.dt_inicio)), 'yyyy/MM/dd'))
   // console.log(parseISO(os.dt_inicio))
 
-  
-
+  // fechar no icone "X"
   const handleOnClose = (e) => {
     if(e.target.id === "container")
     console.log('clickou')
     onClose()
   };
+
+  // fechar com "ESC"
+  useEffect(() => {
+    function handleEscapeKey(event: KeyboardEvent) {
+      if (event.code === 'Escape') {
+        onClose()
+      }
+    }
+  
+    document.addEventListener('keydown', handleEscapeKey)
+    return () => document.removeEventListener('keydown', handleEscapeKey)
+  }, [])
+  
 
 
   if (!visible) return null;
@@ -97,13 +109,24 @@ export default function ModalY({ visible, onClose, id}) {
     <div 
       // id="container"
       // onClick={handleOnClose}
-      className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex items-center justify-center"
+      // className="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"
+      className="fixed inset-0 overflow-auto bg-black bg-opacity-25 backdrop-blur-sm flex items-center justify-center"
     >
 
-      <div className="relative bg-white p-5 rounded w-auto h-5/5 ">
+      {/* <div className="relative bg-white p-5 w-auto h-full max-w-md md:h-auto"> */}
+      {/* <div className="block bg-white p-5 rounded w-auto h-auto "> */}
+
+      {/* <div className="fixed bg-white z-10 overflow-y-auto"> */}
+      {/* <div className="flex bg-white min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"> */}
+
+      {/* <div className="block bg-white"> */}
+      
+      {/* <div className="relative bg-white m-10 p-5 w-auto h-auto md:m-10 md:h-auto md:w-auto"> */}
+      <div className="relative bg-white h-auto w-auto m-auto p-4">
+
 
         <FaTimes
-          className="absolute right-5 cursor-pointer m-1"
+          className="absolute right-0 top-0 cursor-pointer m-2"
           id="container"
           onClick={handleOnClose}
         />
@@ -112,7 +135,7 @@ export default function ModalY({ visible, onClose, id}) {
          Ordem de Serviço (Modal Y)
         </h1>
 
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className='relative h-auto w-auto m-auto'>
 
           <div className="grid md:grid-cols-2">
 
@@ -196,15 +219,18 @@ export default function ModalY({ visible, onClose, id}) {
 
             </div>
 
-            <div className="grid md:grid-cols-1 px-5 ">
+            <div className="grid grid-cols-1 md:grid-cols-1 px-5 ">
               
-              <div className="grid grid-rows-5 grid-flow-col gap-2">
+
+              <div className="grid grid-rows-1 md:grid-rows-5 gap-2">
+              {/* <div className="grid h-full grid-rows-5 md:grid-rows-auto  gap-2"> */}
+              {/* <div className="grid h-full grid-rows-5 md:grid-rows-auto grid-flow-col gap-2"> */}
 
                 {os.lista_respostas?.map((item, index) => {
                   console.log('item', item)
                   return (   
 
-                    <div className="relative z-0 p-8 h-36 w-full bg-gray-100 rounded-lg">
+                    <div className="relative z-0 p-8 h-36 w-full bg-gray-100 rounded-lg gap-2">
                       <h4> {item.id_funcionario}
 
                         <span style={{padding: '20px'}} >
@@ -231,16 +257,24 @@ export default function ModalY({ visible, onClose, id}) {
             </div>
           </div>
         
-          <div className="text-right">
-            <button className="px-5 py-2 bg-gray-700 text-black rounded">
+          <div className="text-right py-5 pl-6">
+            <button className="px-5 py-2 bg-gray-700 shadow-md text-black rounded">
               Voltar
             </button>
-            <button type="submit" className="px-5 py-2 bg-gray-700 text-black rounded">
-              Salvar
+
+            <button type="submit" className="px-5 py-2 w-32 bg-green-50 text-white rounded">
+
+              <div className="text-center inline-flex items-center mr-2 ">
+                <FaSave className="m-2" />  Salvar
+              </div>
+
             </button>
-            <button type="submit" className="px-5 py-2 bg-gray-700 bg-blue text-white rounded">
+
+            {/* FaSave */}
+
+            {/* <button type="submit" className="px-5 py-2 bg-gray-700 bg-blue text-white rounded">
               Finalizar e enviar feedback
-            </button>
+            </button> */}
           </div>
 
         </form>

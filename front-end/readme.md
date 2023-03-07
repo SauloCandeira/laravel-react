@@ -19,6 +19,16 @@ Dependencias:
 # CONFIGURAR GITHUB
 1º - Git init
 
+# VARIAVEIS DE AMBIENTE
+
+http://127.0.0.1:8000 -> Local
+http://127.0.0.1:8000 -> Compartilhado
+
+Front end:
+"dev": "vite --host 0.0.0.0",
+
+Back end:
+php artisan serve --host 0.0.0.0 
 
 # FONTE:
 

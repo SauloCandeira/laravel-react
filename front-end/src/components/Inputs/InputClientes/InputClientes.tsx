@@ -26,6 +26,15 @@ export function InputClientes({request, onChange, value, handleResult} : InputXP
           autoComplete="off"
           type="text" 
           id="cliente" 
+
+          // onBlur={() => {
+
+          //   setOpen(false)
+
+          // }}
+
+          // onBlur={() => setOpen(open)}
+          // onFocus={() => setOpen(!open)}
           onClick={() => setOpen(!open)}
           value={inputValue}
           onChange={(e)=>setInputValue(e.target.value.toLowerCase())} 
@@ -55,6 +64,11 @@ export function InputClientes({request, onChange, value, handleResult} : InputXP
                 ? "block"
                 : "hidden"
               }`}
+
+              // onFocus={() => setOpen(false)}
+
+
+
               onClick={() => {
                 if(item.no_empresa.toLowerCase() !== selected.toLowerCase()){
                   setInputValue(item.no_empresa)
@@ -62,6 +76,8 @@ export function InputClientes({request, onChange, value, handleResult} : InputXP
                   setInputKey(item.id_empresa)
                 }
               }}
+
+
             >
 
               {item.no_empresa}

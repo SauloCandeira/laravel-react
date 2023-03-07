@@ -28,7 +28,7 @@ export function InputFuncionarios({request, handleResult} : InputXProps) {
 
   return (
     <>
-      <div className="relative z-20 w-full mb-6 group">
+      <div className="relative z-10 w-full mb-6 group">
 
         <input 
           autoComplete="off"

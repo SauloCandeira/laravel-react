@@ -25,6 +25,9 @@ Route::get('/clientes', [EmpresaController::class, 'searchClientes']);
 // Tipos
 Route::get('/tipos', [TipoController::class, 'searchTipos']);
 
+// Arquivar
+Route::post('/arquivar/{id}', [OsController::class, 'arquivar']);
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

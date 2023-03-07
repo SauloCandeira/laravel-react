@@ -8,22 +8,32 @@ type ContainerProps = {
     hoverBgColor: string,
     hoverColor: string,
     height: string,
-    width: string
+    width: string,
+    // margin: string
 }
 
 export const variantToSize = { 
     p: {
         width: '65px',
-        height:'26px'
+        // height:'26px',
+        height:'29px',
+        // margin: '0px 03px'
     },
     m: {
         width: '97px',
-        height:'29px'
+        height:'29px',
+        // margin: '0px 03px'
     },
     g: {
         width: '120px',
-        height: '36px'
+        height: '36px',
+        // margin: '0px 03px'
     }
+    // auto: {
+    //     width: 'auto',
+    //     height: 'auto',
+    //     margin: '0px 03px'
+    // }
 
 }
 
@@ -41,18 +51,18 @@ export const variantToColor = {
     secondary: {
         bgColor: AppColors.secondary,
         borderColor: AppColors.secondary,
-        color: AppColors.dark,
+        color: AppColors.white,
         hover: {
-            bgColor: AppColors.primaryHover,
-            color: AppColors.primaryHover
+            bgColor: AppColors.secondary,
+            color: AppColors.white
         }
     },
     outline: {
         bgColor: 'transparent',
-        borderColor: AppColors.primary,
-        color: AppColors.primary,
+        borderColor: AppColors.secondary,
+        color: AppColors.secondary,
         hover: {
-            bgColor: AppColors.primary,
+            bgColor: AppColors.secondary,
             color: AppColors.white,
         }
     },
@@ -91,6 +101,7 @@ export const Container = styled.button<ContainerProps>`
     cursor: pointer;
     border-radius: 6px;
     margin: 0 3px;
+    /* margin:  ${props => props.margin}; */
 
     &:hover {
         background-color: ${props => props.hoverBgColor};
@@ -98,4 +109,6 @@ export const Container = styled.button<ContainerProps>`
         color: ${props => props.hoverColor};
     } 
 `;
+
+
 

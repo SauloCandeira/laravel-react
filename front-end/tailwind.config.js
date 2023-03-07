@@ -6,6 +6,7 @@ module.exports = {
   theme: {
 
     fontSize: {
+      xss: 12,
       xs: 14,
       sm: 16,
       md: 18,
@@ -37,8 +38,11 @@ module.exports = {
         100: '#ff3700',
         75: '#fb6340',
         50: '#ff9109'
-      }
+      }, 
 
+      green: {
+        50: '#2dce89'
+      }
       
 
 

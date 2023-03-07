@@ -1,9 +1,10 @@
 import { Container, variantToColor } from './styles'
 import { Text } from "../Texts/Text"
+import { ReactNode } from 'react';
 
 export type LabelProps = {
-  children: string;
-  variant: 'default' | 'primary' | 'secondary' ;
+  children: ReactNode;
+  variant: 'default' | 'primary' | 'secondary' | 'tertiary' ;
 }
 
 export function Label({children,variant}:LabelProps) { 

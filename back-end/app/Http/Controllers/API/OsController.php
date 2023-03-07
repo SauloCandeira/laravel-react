@@ -8,6 +8,7 @@ use App\Models\Os;
 use App\Models\OsFuncionario;
 use App\Models\Funcionario;
 use App\Models\OsStatus;
+use Carbon\Carbon;
 class OsController extends Controller
 {
 
@@ -28,6 +29,29 @@ class OsController extends Controller
         // $os = Os::with('condominio', 'status', 'tipo', 'osfuncionario', 'funcionario')->whereIn('id', $id)->get();
         // dd($os);
         return $os;
+    }
+
+    public function arquivar($id)
+    {
+        $os = Os::find($id);
+        $os->dt_fim = Carbon::now()->format('Y-m-d H:i:s');
+        $os->update();
+        // $dataHoje = Carbon::now()->format('Y-m-d');
+        // $os->update([
+        //     "dt_fim" => $dataHoje
+        // ]);
+        // $os->dt_fim
+        return response()->json([
+            'status' => 200,
+            'message' => 'O.S arquivada com sucesso!'
+        ]);
+        // dd($os);
+        // $os = Os::with('listaRespostas', 'funcionario','condominio', 'status', 'tipo', 'osfuncionario', 'funcionario')->where('id_os', $id)->first();
+
+        // $os = Os::find($id);
+        // $os = Os::with('condominio', 'status', 'tipo', 'osfuncionario', 'funcionario')->whereIn('id', $id)->get();
+        // dd($os);
+        // return $os;
     }
 
 
@@ -68,7 +92,7 @@ class OsController extends Controller
 
         return response()->json([
             'status' => 200,
-            'message' => 'Os added Sucessfully'
+            'message' => 'O.S criada com sucesso!'
         ]);
     }
 }

@@ -32,10 +32,6 @@ export type ModalXProps = {
 
 export default function ModalX({ empresas, tipos , visible, onClose } : ModalProps ) {
 
-  // console.log('empresas', empresas)
-  // console.log('tipos', tipos)
-
-  // console.log('data', request)
   const [selectedOption, setSelectedOption] = useState("");
   const [text, setText] = useState("")
   const [clientes, setClientes] = useState([]);
@@ -44,8 +40,15 @@ export default function ModalX({ empresas, tipos , visible, onClose } : ModalPro
   const [selected, setSelected] = useState("")
   const [formData, setFormData] = useState(defaultFormData);
   const { condominio, cliente, tipo, data, prioridade, funcionarios, descricao } = formData;
+  const [message, setMessage] = useState(false) 
 
-  // console.log(formData)
+  // Atualizar pagina
+  const refreshPage = ()=>{
+    window.location.reload();
+  }
+
+
+  // Pegar valores do Form
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -53,6 +56,7 @@ export default function ModalX({ empresas, tipos , visible, onClose } : ModalPro
     }));
   }
 
+  // Enviar formulario
   async function onSubmit (e: FormEvent) {
     e.preventDefault();
 
@@ -61,26 +65,41 @@ export default function ModalX({ empresas, tipos , visible, onClose } : ModalPro
 
     if(res.data.status === 200)
     {
-      // console.log('formData', formData)
-      // console.log('message', res.data.message)
+      window.alert(JSON.stringify(res.data.message))
+      // alert(“mensagem”);
+      setMessage(true)
       setFormData(defaultFormData);
-
+      onClose()
+      refreshPage()
     }
-
   }
 
+
+  // fechar no icone "X"
   const handleOnClose = (e) => {
     if(e.target.id === "container")
    
     onClose()
   };
 
+  // fechar com "ESC"
+  useEffect(() => {
+    function handleEscapeKey(event: KeyboardEvent) {
+      if (event.code === 'Escape') {
+        onClose()
+      }
+    }
+  
+    document.addEventListener('keydown', handleEscapeKey)
+    return () => document.removeEventListener('keydown', handleEscapeKey)
+  }, [])
+
   const [resultFuncionario, setResultFuncionarios] = useState('')
 
-  // const updateFuncionarios = r => {
-  //   setResultFuncionarios(r)
-  //   formData.funcionarios = resultFuncionario
-  // }
+  const updateFuncionarios = r => {
+    setResultFuncionarios(r)
+    formData.funcionarios = resultFuncionario
+  }
 
   const [resultClientes, setResultClientes] = useState('')
 
@@ -110,16 +129,22 @@ export default function ModalX({ empresas, tipos , visible, onClose } : ModalPro
   if (!visible) return null;
 
   return (
+    <>
     <div 
       // id="container"
       // onClick={handleOnClose}
       className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex items-center justify-center"
     >
 
-      <div className="relative bg-white p-5 rounded w-auto h-4/5">
-        
+      <div className="absolute bg-white p-5 rounded w-auto h-auto">
+
+        {/* <div className={`p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert" ${message ? 'absolute' : 'hidden'}`}>
+          <span className="font-medium">Successo!</span> Ordem de Serviço criada.
+        </div> */}
+
+
         <FaTimes
-          className="absolute right-5 cursor-pointer m-1"
+          className="absolute right-5 cursor-pointer"
           id="container"
           onClick={handleOnClose}
         />
@@ -157,22 +182,26 @@ export default function ModalX({ empresas, tipos , visible, onClose } : ModalPro
           </div>
 
           {/* <div className="grid md:grid-cols-1 md:gap-4">
-            <InputFuncionarios request={['teste','teste-2','teste-3']} />
+            <InputFuncionarios handleResult={updateFuncionarios} request={['teste','teste-2','teste-3']} />
           </div> */}
 
           <div className="grid md:grid-cols-1 md:gap-4">
-            {/* <InputFuncionariosB id="funcionarios" handleResult={updateFuncionarios} onChange={onChange} value={funcionarios} request={['teste','teste-2','teste-3']} /> */}
+            <InputFuncionariosB id="funcionarios" handleResult={updateFuncionarios} onChange={onChange} value={funcionarios} request={['teste','teste-2','teste-3']} /> 
           </div>
 
           <div className="grid md:grid-cols-1 md:gap-4">
             <InputProblema />
           </div>
 
-          <div className="text-right">
-            <button className="px-5 py-2 bg-gray-700 text-black rounded">
+          <div className="right-0 text-right">
+            <button 
+              className="px-5 py-2 shadow-md bg-white text-black rounded"
+              onClick={handleOnClose}
+              id="container"
+            >
               Voltar
             </button>
-            <button type="submit" className="px-5 py-2 bg-gray-700 text-black rounded">
+            <button type="submit" className="px-5 py-2 bg-orange-100 text-white rounded">
               Abrir 
             </button>
           </div>
@@ -180,5 +209,6 @@ export default function ModalX({ empresas, tipos , visible, onClose } : ModalPro
         </form>
       </div>
     </div>
+    </>
   );
 }

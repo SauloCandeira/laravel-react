@@ -13,6 +13,7 @@ class OsStatus extends Model
 
     public function listaDeOs()
     {
-        return $this->hasMany(Os::class, 'id_os_status');
+        // return $this->hasMany(Os::class, 'id_os_status');
+        return $this->hasMany(Os::class, 'id_os_status')->where('dt_fim', '=', null );
     }
 }

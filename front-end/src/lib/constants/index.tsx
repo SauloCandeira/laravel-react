@@ -29,12 +29,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		path: '/',
 		icon: <FaDesktop className="h-3" />
 	},
-	// {
-	// 	key: 'products',
-	// 	label: 'Dashboard Y',
-	// 	path: '/dashboardY',
-	// 	icon: <HiOutlineCube />
-	// },
+	{
+		key: 'products',
+		label: 'Dashboard Y',
+		path: '/dashboardY',
+		icon: <HiOutlineCube />
+	},
 	// {
 	// 	key: 'orders',
 	// 	label: 'Dashboard X',

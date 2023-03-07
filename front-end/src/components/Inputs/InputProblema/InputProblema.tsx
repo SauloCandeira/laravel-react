@@ -16,12 +16,12 @@ export function InputProblema() {
 
   return (
     <>
-      <div className="relative z-10 w-full mb-6 group">
+      <div className="relative z-0 w-full mb-6 group">
 
         <textarea 
           autoComplete="off"
           type="text" 
-          rows="6"
+          rows="7"
           id="message" 
           onClick={() => setOpen(!open)}
           value={inputValue}
