@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Funcionario extends Model
+class Funcionarios extends Model
 {
+
     protected $table = 'funcionario';
     protected $primaryKey = 'id_funcionario';
     use HasFactory;
@@ -15,4 +16,5 @@ class Funcionario extends Model
     // {
     //     return $this->hasMany(Os::class, 'id_funcionario');
     // }
+    public $timestamps = false;
 }

@@ -2,6 +2,7 @@ import { FormEvent, useState, useEffect}from 'react';
 import { format, parseISO } from 'date-fns';
 import axios from 'axios';
 import { FaTimes, FaSave } from 'react-icons/fa';
+import api from '../../../services/api'
 
 const defaultFormData = {
   cliente: "",
@@ -17,15 +18,29 @@ export default function ModalY({ visible, onClose, id}) {
 
   // console.log(id)
   const [os, setOs] = useState('');
+  const [oslistFunc, setOsListFunc] = useState([]);
 
   async function getOs()
   {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/os/'+id)
+      const response = await api.get('/api/os/'+id)
       // console.log('response', response)
       const data = response.data;
-
+      console.log('data --->', data)
       setOs(data)
+
+      // var lista = [];
+      const lista = [];
+
+      data.lista_funcionarios.map((e) => {
+        console.log('e ---->',  e)
+        lista.push(e.no_funcionario)
+        setOsListFunc(lista)
+      })
+
+
+      // console.log('oslistFunc --->', oslistFunc)
+      // setOsListFunc(data.funcionario)
     
     } catch (error) {
       console.log(error);
@@ -48,7 +63,7 @@ export default function ModalY({ visible, onClose, id}) {
     e.preventDefault();
 
     console.log(formData)
-    const res = await axios.post('http://127.0.0.1:8000/api/os', formData)
+    const res = await axios.post('http://10.0.0.57:8000/api/os', formData)
 
     if(res.data.status === 200)
     {
@@ -58,6 +73,9 @@ export default function ModalY({ visible, onClose, id}) {
 
     }
   }
+
+
+
 
   // console.log(os.lista_respostas)
   // console.log(format(new Date(os.dt_inicio), 'yyyy/MM/dd'))
@@ -96,6 +114,7 @@ export default function ModalY({ visible, onClose, id}) {
 
   useEffect(() => {
     getOs();
+    // formatList();
   }, []);
 
   const timeout = setTimeout(function(){
@@ -104,6 +123,13 @@ export default function ModalY({ visible, onClose, id}) {
     setNumeroOs(dateFormat)
   }, 100) //Após 3 segundos a função é executada.
   
+
+  // console.log('os --->', os)
+
+  // os.funcionario.map((e) => {
+  //   console.log('E ------>', e)
+  // })
+
   return (
     
     <div 
@@ -198,7 +224,7 @@ export default function ModalY({ visible, onClose, id}) {
               </div>
 
               <div className="relative z-0 w-full mb-6 group">
-                <input type="select" id="funcionarios" onChange={onChange} value={os.funcionario?.no_funcionario} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                <input type="select" id="funcionarios" onChange={onChange} value={oslistFunc} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                 <label htmlFor="floating_repeat_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> Funcionarios responsáveis </label>
               </div>
 

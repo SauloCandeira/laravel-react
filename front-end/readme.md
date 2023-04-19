@@ -22,13 +22,15 @@ Dependencias:
 # VARIAVEIS DE AMBIENTE
 
 http://127.0.0.1:8000 -> Local
-http://127.0.0.1:8000 -> Compartilhado
+http://10.0.0.57:8000-> Compartilhado
 
-Front end:
-"dev": "vite --host 0.0.0.0",
+Front end (package.json):
+trocar -> "dev": "vite",
+por -> "dev": "vite --host 0.0.0.0",
 
-Back end:
+Back end (terminal):
 php artisan serve --host 0.0.0.0 
+endereço: 10.0.0.57:8000
 
 # FONTE:
 

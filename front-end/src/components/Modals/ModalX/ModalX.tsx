@@ -11,6 +11,7 @@ import InputProblema from '../../Inputs/InputProblema/InputProblema';
 import { FaTimes } from 'react-icons/fa';
 import InputFuncionarios from '../../Inputs/InputFuncionarios/InputFuncionarios';
 import InputFuncionariosB from '../../Inputs/InputFuncionariosB/InputFuncionariosB';
+import api from '../../../services/api'
 
 const defaultFormData = {
   cliente: "",
@@ -30,8 +31,11 @@ export type ModalXProps = {
 }
 
 
-export default function ModalX({ empresas, tipos , visible, onClose } : ModalProps ) {
+export default function ModalX({ empresas, tipos , listaFuncionarios, visible, onClose } : ModalProps ) {
 
+  // console.log(tipos)
+  // console.log(empresas)
+  // console.log(listaFuncionarios)
   const [selectedOption, setSelectedOption] = useState("");
   const [text, setText] = useState("")
   const [clientes, setClientes] = useState([]);
@@ -41,12 +45,11 @@ export default function ModalX({ empresas, tipos , visible, onClose } : ModalPro
   const [formData, setFormData] = useState(defaultFormData);
   const { condominio, cliente, tipo, data, prioridade, funcionarios, descricao } = formData;
   const [message, setMessage] = useState(false) 
-
+ 
   // Atualizar pagina
   const refreshPage = ()=>{
     window.location.reload();
   }
-
 
   // Pegar valores do Form
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +64,7 @@ export default function ModalX({ empresas, tipos , visible, onClose } : ModalPro
     e.preventDefault();
 
     console.log(formData)
-    const res = await axios.post('http://127.0.0.1:8000/api/os', formData)
+    const res = await api.post('/api/os', formData)
 
     if(res.data.status === 200)
     {
@@ -73,7 +76,6 @@ export default function ModalX({ empresas, tipos , visible, onClose } : ModalPro
       refreshPage()
     }
   }
-
 
   // fechar no icone "X"
   const handleOnClose = (e) => {
@@ -97,6 +99,7 @@ export default function ModalX({ empresas, tipos , visible, onClose } : ModalPro
   const [resultFuncionario, setResultFuncionarios] = useState('')
 
   const updateFuncionarios = r => {
+    console.log(r)
     setResultFuncionarios(r)
     formData.funcionarios = resultFuncionario
   }
@@ -123,10 +126,14 @@ export default function ModalX({ empresas, tipos , visible, onClose } : ModalPro
   }
 
   formData.cliente = '1'
-  formData.funcionarios = '1'
+  // formData.funcionarios = '1'
 
 
   if (!visible) return null;
+
+  // useEffect(() => {
+  //   // getFuncionarios();
+  // }, []);
 
   return (
     <>
@@ -186,7 +193,7 @@ export default function ModalX({ empresas, tipos , visible, onClose } : ModalPro
           </div> */}
 
           <div className="grid md:grid-cols-1 md:gap-4">
-            <InputFuncionariosB id="funcionarios" handleResult={updateFuncionarios} onChange={onChange} value={funcionarios} request={['teste','teste-2','teste-3']} /> 
+            <InputFuncionariosB id="funcionarios" handleResult={updateFuncionarios} onChange={onChange} value={funcionarios} request={listaFuncionarios} /> 
           </div>
 
           <div className="grid md:grid-cols-1 md:gap-4">

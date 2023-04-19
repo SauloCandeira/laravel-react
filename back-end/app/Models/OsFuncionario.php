@@ -15,4 +15,5 @@ class OsFuncionario extends Model
     // {
     //     return $this->hasMany(Os::class, 'id_funcionario');
     // }
+    public $timestamps = false;
 }

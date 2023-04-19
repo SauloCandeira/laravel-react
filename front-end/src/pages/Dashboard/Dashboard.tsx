@@ -25,7 +25,7 @@ export default function Dashboard() {
   // async function getOs()
   // {
   //   try {
-  //     const response = await axios.get('http://127.0.0.1:8000/api/os')
+  //     const response = await axios.get('http://10.0.0.57:8000/api/os')
 
   //     const data = response.data;
 
@@ -39,7 +39,7 @@ export default function Dashboard() {
   async function getOsStatus()
   {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/os-status')
+      const response = await axios.get('http://10.0.0.57:8000/api/os-status')
 
       const data = response.data;
 
@@ -54,7 +54,7 @@ export default function Dashboard() {
   async function getClientes()
   {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/clientes')
+      const response = await axios.get('http://10.0.0.57:8000/api/clientes')
 
       const data = response.data;
       // console.log(data)

@@ -34,12 +34,19 @@ class Os extends Model
 
     public function funcionario()
     {
-        return $this->hasMany(Funcionario::class, 'id_funcionario');
+        return $this->hasMany(Funcionarios::class, 'id_funcionario');
     }
 
     public function listaFuncionarios()
     {
-        return $this->hasMany(OsFuncionario::class, 'id_os');
+        // return $this->hasMany(OsFuncionario::class, 'id_funcionario');
+        return $this
+            ->hasMany(OsFuncionario::class, 'id_os')
+            ->join('funcionario', 'funcionario.id_funcionario', 'os_funcionario.id_funcionario')
+            ->select([
+                'os_funcionario.*',
+                'funcionario.no_funcionario'
+            ]);
     }
 
     public function listaRespostas()

@@ -20,7 +20,7 @@ export default function ModalY({ visible, onClose, id}) {
   async function getOs()
   {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/os/'+id)
+      const response = await axios.get('http://10.0.0.57:8000/api/os/'+id)
       // console.log('response', response)
       const data = response.data;
 
@@ -47,7 +47,7 @@ export default function ModalY({ visible, onClose, id}) {
     e.preventDefault();
 
     console.log(formData)
-    const res = await axios.post('http://127.0.0.1:8000/api/os', formData)
+    const res = await axios.post('http://10.0.0.57:8000/api/os', formData)
 
     if(res.data.status === 200)
     {

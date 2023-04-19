@@ -10,6 +10,8 @@ import { Text } from "../../components/Texts/Text";
 import ModalZ from "../../components/Modals/ModalZ/ModalZ";
 import { FaHome, FaPlus, FaEye, FaSyncAlt} from 'react-icons/fa'
 import { Link } from "react-router-dom";
+import api from '../../services/api'
+
 
 export default function DashboardX() {
 
@@ -19,9 +21,10 @@ export default function DashboardX() {
   const [tipos, setTipos] = useState([]);
   const [osStatus, setOsStatus] = useState([]);
   const [query, setQuery] = useState("");
+  const [funcionarios, setFuncionarios] = useState([]);
 
   const handleOnClose = () => setShowModal(false)
-
+  
   // console.log(osStatus.lista_de_os.filter(item => item.includes("bo"))
 
   // console.log('query', query)
@@ -34,9 +37,22 @@ export default function DashboardX() {
   async function getOsStatus()
   {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/os-status')
+      const response = await api.get('/api/os-status')
       const data = response.data;
       setOsStatus(data)
+    
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getFuncionarios()
+  {
+    try {
+      const response = await api.get('/api/funcionarios')
+      const data = response.data;
+      // console.log(data)
+      setFuncionarios(data)
     
     } catch (error) {
       console.log(error);
@@ -47,7 +63,7 @@ export default function DashboardX() {
   async function getEmpresas()
   {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/clientes')
+      const response = await api.get('/api/clientes')
       const data = response.data;
       setEmpresas(data)
     
@@ -59,7 +75,7 @@ export default function DashboardX() {
   async function getTipos()
   {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/tipos')
+      const response = await api.get('/api/tipos')
       const data = response.data;
       setTipos(data)
     
@@ -67,6 +83,7 @@ export default function DashboardX() {
       console.log(error);
     }
   }
+
 
   const refreshPage = ()=>{
     window.location.reload();
@@ -76,6 +93,7 @@ export default function DashboardX() {
     getEmpresas();
     getTipos();
     getOsStatus();
+    getFuncionarios();
   }, []);
 
   return (
@@ -132,7 +150,7 @@ export default function DashboardX() {
             </div>
           </div>
 
-          <ModalX empresas={empresas} tipos={tipos} onClose={handleOnClose} visible={showModal}/>
+          <ModalX empresas={empresas} tipos={tipos} listaFuncionarios={funcionarios} onClose={handleOnClose} visible={showModal}/>
 
           <div className="flex flex-col flex-1 py-0 p-4">
 

@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/sidebar";
 import SidebarY from "../../components/SidebarX/SidebarY";
 import SidebarZ from "../../components/SidebarX/SidebarZ";
+import api from '../../services/api'
 
 export default function DashboardY() {
 
@@ -32,7 +33,7 @@ export default function DashboardY() {
   async function getOsStatus()
   {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/os-status')
+      const response = await api.get('/api/os-status')
       const data = response.data;
       setOsStatus(data)
     
@@ -45,7 +46,7 @@ export default function DashboardY() {
   async function getEmpresas()
   {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/clientes')
+      const response = await api.get('/api/clientes')
       const data = response.data;
       setEmpresas(data)
     
@@ -57,7 +58,7 @@ export default function DashboardY() {
   async function getTipos()
   {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/tipos')
+      const response = await api.get('/api/tipos')
       const data = response.data;
       setTipos(data)
     

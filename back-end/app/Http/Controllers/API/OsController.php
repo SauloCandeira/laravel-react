@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Os;
 use App\Models\OsFuncionario;
-use App\Models\Funcionario;
+use App\Models\Funcionarios;
 use App\Models\OsStatus;
 use Carbon\Carbon;
 class OsController extends Controller
@@ -23,7 +23,7 @@ class OsController extends Controller
     public function searchId($id)
     {
 
-        $os = Os::with('listaRespostas', 'funcionario','condominio', 'status', 'tipo', 'osfuncionario', 'funcionario')->where('id_os', $id)->first();
+        $os = Os::with('listaFuncionarios','listaRespostas', 'funcionario','condominio', 'status', 'tipo', 'osfuncionario', 'funcionario')->where('id_os', $id)->first();
 
         // $os = Os::find($id);
         // $os = Os::with('condominio', 'status', 'tipo', 'osfuncionario', 'funcionario')->whereIn('id', $id)->get();
@@ -78,7 +78,11 @@ class OsController extends Controller
 
     public function store(Request $request)
     {
+
+        // 1º - Instanciar Models
         $os = new Os;
+
+        // 2º - Salvar Dados da O.S
         $os->id_os_status = 6;
         $os->id_funcionario = 1;
         $os->id_condominio = $request->input('condominio');
@@ -86,9 +90,22 @@ class OsController extends Controller
         $os->id_os_tipo = $request->input('tipo');
         $os->dt_agendamento = $request->input('data');
         $os->nu_prioridade = $request->input('prioridade');
-        $os->id_funcionario = $request->input('funcionarios');
         $os->ds_os = $request->input('descricao');
         $os->save();
+
+        // 2º - Salvar Funcionarios da OS
+        if(count($request->input('funcionarios')) > 0)
+        {
+            foreach ($request->input('funcionarios') as $valor) {
+
+                $osFuncionario = new OsFuncionario();
+                $osFuncionario->id_os = $os->id_os;
+                $osFuncionario->id_funcionario = $valor;
+                $osFuncionario->save();
+
+            }
+        }
+
 
         return response()->json([
             'status' => 200,

@@ -11,6 +11,7 @@ import ModalY  from "../../Modals/ModalY/ModalY"
 import { FaHome, FaPlus, FaEye, FaSyncAlt, FaArchive } from 'react-icons/fa'
 import Badge from "../../Badge/Badge";
 import Tooltip from "../../Tooltip/Tooltip";
+import api from '../../../services/api'
 
 export type TableProps = {
   children: string;
@@ -45,7 +46,7 @@ export default function Table4({ data ,nome, hover = true, striped = true, varia
     async function arquivar(id) {
         console.log(id)
 
-        const res = await axios.post('http://127.0.0.1:8000/api/arquivar/'+id)
+        const res = await api.post('/api/arquivar/'+id)
 
         // console.log('res', res.status)
         if(res.data.status === 200)
@@ -57,44 +58,22 @@ export default function Table4({ data ,nome, hover = true, striped = true, varia
 
     }
 
-
-
-
     const filterBySearch = () => {
-        // Access input value
-        // const query = event.target.value;
-        // Create copy of item list
-        // var updatedList = [...data];
-        // Include all elements which includes the search query
+
         var updatedList = data?.filter((item) => {
             return query.toLowerCase() === '' 
             ? item : (format(new Date(item.dt_inicio), 'ddMMyyyy')+-item.id_os).includes(query) 
             || item.condominio.no_condominio.toLowerCase().includes(query)
         });
-        // Trigger render with updated values
 
-        
         setFilteredList(updatedList);
-        console.log('filteredList', filteredList?.length)
-        // console.log('filteredList',filteredList)
-        // console.log('updatedList',updatedList)
     };
-
-
-
+    
 
     useEffect(() => {
         filterBySearch()
     }, [query]);
-    // const teste = data.filter((item) => item.startsWith(query))
-    // console.log('teste', teste)
 
-    // useEffect(() => {
-    //     arquivar();
-    // }, []);
-    
-    // console.log('query', query)
-    // console.log('data', data)
     return (
         <>
 
@@ -126,6 +105,7 @@ export default function Table4({ data ,nome, hover = true, striped = true, varia
                         <tbody>
 
                             {filteredList?.map((Client, index) => {
+                                // console.log('Client', Client)
 
                                 return (
                                     <tr key={index} className={`${hover && "hover"}`} >
@@ -163,7 +143,7 @@ export default function Table4({ data ,nome, hover = true, striped = true, varia
                                         <td> <Label variant='tertiary'>{Client.tipo.no_os_tipo} </Label> </td>
                                         <td> 
                                         <div key={Math.random()} style={{ display: 'grid',  margin: '0px 0px 0px 0px', gridTemplateColumns: 'repeat(auto-fill, 20px)'}}>
-                                            {Client.funcionario?.map((Funcionario, index) => {
+                                            {Client.lista_funcionarios?.map((Funcionario, index) => {
                                                 return (
                                                     <div key={index}>
                                                         <Tooltip message={Funcionario.no_funcionario}>
@@ -183,7 +163,7 @@ export default function Table4({ data ,nome, hover = true, striped = true, varia
                                                     onClick={() =>  setShowModal({ isOpen: true, postId: Client.id_os  })}
                                                     size="p" 
                                                     // variant="quaternary"
-                                                        variant="outline"
+                                                    variant="outline"
                                                 > 
 
                                                     <div className="text-center inline-flex items-center mr-2 ">

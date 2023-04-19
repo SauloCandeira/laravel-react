@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\OsController;
 use App\Http\Controllers\API\EmpresaController;
 use App\Http\Controllers\API\TipoController;
+use App\Http\Controllers\API\FuncionariosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,7 @@ Route::get('/os-status', [OsController::class, 'searchStatus']);
 
 // Funcionarios
 Route::get('/Osfuncionarios', [OsController::class, 'searchOsFuncionarios']);
-Route::get('/funcionarios', [OsController::class, 'searchFuncionarios']);
+Route::get('/funcionarios', [FuncionariosController::class, 'searchFuncionarios']);
 
 // Clientes
 Route::get('/clientes', [EmpresaController::class, 'searchClientes']);

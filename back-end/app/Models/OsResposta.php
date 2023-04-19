@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OsResposta extends Model
 {
+
     protected $table = 'os_resposta';
     protected $primaryKey = 'id_os_resposta';
     use HasFactory;
@@ -15,4 +16,5 @@ class OsResposta extends Model
     // {
     //     return $this->hasMany(Os::class, 'id_os');
     // }
+    public $timestamps = false;
 }
